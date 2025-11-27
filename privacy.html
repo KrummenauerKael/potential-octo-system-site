@@ -5,28 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - CityEats</title>
     <meta name="description" content="CityEats privacy policy. Learn how we collect, use, and protect your data.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary: #f97316;
+            --primary-dark: #ea580c;
+            --secondary: #f59e0b;
+            --accent: #ff6b35;
+            --dark: #0f0f0f;
+            --dark-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glow: rgba(249, 115, 22, 0.4);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            color: #1a1a1a;
-            line-height: 1.6;
-            background: #f5f5f5;
+        html {
+            scroll-behavior: smooth;
         }
 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark);
+        }
+
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation: float1 25s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, 50px); }
+        }
+
+        /* Glass Header */
         header {
-            background: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             padding: 16px 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .header-content {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -34,98 +121,234 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #f97316;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links a {
-            color: #666;
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #f97316;
+            color: var(--text-primary);
         }
 
+        /* Main Content */
         main {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 48px 24px;
+            padding: 140px 24px 80px;
         }
 
-        .content-card {
-            background: white;
-            padding: 48px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .date {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 32px;
-        }
-
-        h2 {
-            font-size: 18px;
-            margin-top: 28px;
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1px;
             margin-bottom: 12px;
-            color: #1a1a1a;
         }
 
-        p {
-            margin-bottom: 16px;
-            color: #444;
-        }
-
-        ul {
-            margin-bottom: 16px;
-            padding-left: 24px;
-            color: #444;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        a {
-            color: #f97316;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 32px;
+        .last-updated {
             font-size: 14px;
+            color: var(--text-muted);
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Card */
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .section li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .section li:last-child {
+            margin-bottom: 0;
+        }
+
+        .section li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+        }
+
+        .section a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .section a:hover {
+            opacity: 0.8;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 48px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+            gap: 12px;
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 32px 24px;
-            color: #888;
-            font-size: 13px;
+            padding: 48px 24px;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 80px;
         }
 
+        footer p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 640px) {
+            main {
+                padding: 120px 16px 60px;
+            }
+
             .content-card {
-                padding: 24px;
+                padding: 32px 24px;
+            }
+
+            .section-title {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="bg-gradient"></div>
+    <div class="orb orb-1"></div>
+
     <header>
         <div class="header-content">
             <a href="/" class="logo">CityEats</a>
@@ -136,58 +359,83 @@
     </header>
 
     <main>
-        <div class="content-card">
+        <div class="page-header">
             <h1>Privacy Policy</h1>
-            <p class="date">Last updated: November 23, 2025</p>
-
-            <h2>What We Collect</h2>
-            <ul>
-                <li>Account info (email, username, profile photo)</li>
-                <li>Content you create (reviews, comments, lists, photos)</li>
-                <li>Location data (with your permission, to show nearby restaurants)</li>
-            </ul>
-
-            <h2>How We Use It</h2>
-            <ul>
-                <li>To provide and improve CityEats</li>
-                <li>To show you relevant content and restaurants</li>
-                <li>To send you notifications about activity on your posts</li>
-            </ul>
-
-            <h2>What Others See</h2>
-            <p>Your profile, reviews, and public lists are visible to other CityEats users. You control your privacy through your account settings.</p>
-
-            <h2>Data Storage</h2>
-            <p>We use Firebase (Google) to securely store your data. If you delete your account, your data is permanently removed immediately.</p>
-
-            <h2>Your Choices</h2>
-            <ul>
-                <li>Update or delete your profile anytime</li>
-                <li>Control notification preferences in Settings</li>
-                <li>Delete your account and all data through Settings</li>
-            </ul>
-
-            <h2>Third-Party Services</h2>
-            <p>CityEats uses the following third-party services:</p>
-            <ul>
-                <li>Firebase (Google) - Authentication, database, storage</li>
-                <li>Google Places API - Restaurant information</li>
-                <li>Google AdMob - Advertising (free tier only)</li>
-                <li>Apple Push Notifications - Notifications</li>
-            </ul>
-            <p>We do not sell your personal data to third parties.</p>
-
-            <h2>Children's Privacy</h2>
-            <p>CityEats is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
-
-            <h2>Changes to This Policy</h2>
-            <p>We may update this policy from time to time. We will notify you of significant changes through the app or by email.</p>
-
-            <h2>Contact</h2>
-            <p>Questions about this privacy policy? Email us at <a href="mailto:support@cityeatsapp.com">support@cityeatsapp.com</a></p>
-
-            <a href="/" class="back-link">&larr; Back to Home</a>
+            <p class="last-updated">Last updated: November 23, 2025</p>
         </div>
+
+        <div class="content-card">
+            <div class="section">
+                <h2 class="section-title">What We Collect</h2>
+                <ul>
+                    <li>Account info (email, username, profile photo)</li>
+                    <li>Content you create (reviews, comments, lists, photos)</li>
+                    <li>Location data (with your permission, to show nearby restaurants)</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">How We Use It</h2>
+                <ul>
+                    <li>To provide and improve CityEats</li>
+                    <li>To show you relevant content and restaurants</li>
+                    <li>To send you notifications about activity on your posts</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">What Others See</h2>
+                <p>Your profile, reviews, and public lists are visible to other CityEats users. You control your privacy through your account settings.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Data Storage</h2>
+                <p>We use Firebase (Google) to securely store your data. If you delete your account, your data is permanently removed immediately.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Your Choices</h2>
+                <ul>
+                    <li>Update or delete your profile anytime</li>
+                    <li>Control notification preferences in Settings</li>
+                    <li>Delete your account and all data through Settings</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Third-Party Services</h2>
+                <p>CityEats uses the following third-party services:</p>
+                <ul>
+                    <li>Firebase (Google) - Authentication, database, storage</li>
+                    <li>Google Places API - Restaurant information</li>
+                    <li>Google AdMob - Advertising (free tier only)</li>
+                    <li>Apple Push Notifications - Notifications</li>
+                </ul>
+                <p>We do not sell your personal data to third parties.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Children's Privacy</h2>
+                <p>CityEats is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Changes to This Policy</h2>
+                <p>We may update this policy from time to time. We will notify you of significant changes through the app or by email.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Contact</h2>
+                <p>Questions about this privacy policy? Email us at <a href="mailto:support@cityeatsapp.com">support@cityeatsapp.com</a></p>
+            </div>
+        </div>
+
+        <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
     </main>
 
     <footer>
